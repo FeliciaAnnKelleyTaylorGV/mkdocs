@@ -1,4 +1,18 @@
-# MkDocs Plugins
+#from mkdocs.exceptions import PluginError
+from mkdocs.plugins import BasePlugin
+
+
+class MyPlugin(BasePlugin):
+    def on_post_page(self, output, page, config, **kwargs):
+        try:
+            # some code that could throw a KeyError
+            ...
+        except KeyError as error:
+            raise PluginError(f"Failed to find the item by key: '{error}'")
+
+    def on_build_error(self, error, **kwargs):
+        # some code to clean things up
+        ... MkDocs Plugins
 
 A Guide to installing, using and creating MkDocs Plugins
 
